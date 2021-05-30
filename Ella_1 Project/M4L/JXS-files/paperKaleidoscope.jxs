@@ -1,0 +1,976 @@
+<jittershader name="thebookofshaders">
+	<description>GL3 stub 20210413</description>
+	<param name="jit_position" type="vec3" state="POSITION" />
+	<param name="jit_texcoord" type="vec2" state="TEXCOORD" />
+	<param name="textureMatrix0" type="mat4" state="TEXTURE0_MATRIX" />
+	<param name="modelViewProjectionMatrix" type="mat4" state="MODELVIEW_PROJECTION_MATRIX" />
+	<param name="u_resolution" type="vec2" state="TEXDIM0" />
+	<param name="u_mouse" type="vec2" default="0 0" />
+    <param name="u_time" type="float" default="0" />
+    <param name="ADSRdata" type="int" default="1" />
+    <param name="mode" type="int" default="0" />
+    <param name="elements1" type="int" default="4" />
+    <param name="elements2" type="int" default="4" />
+    <param name="elements3" type="int" default="4" />
+    <param name="elements4" type="int" default="4" />
+    <param name="elements5" type="int" default="4" />
+	    
+	<param name="layerAngle1" type="float" default="0.0" />
+	<param name="layer1enabled" type="bool" default="1" />
+	<param name="c1" type="vec4" default="0.2 0.2 0.2 1." />
+	<param name="param1_1" type="float" default="0.45" />
+	<param name="param1_2" type="float" default="0.55" />
+	<param name="param1_3" type="float" default="0.46" />
+	<param name="param1_4" type="float" default="0.35" />
+	<param name="param1_5" type="float" default="0.65" />
+	<param name="param1_6" type="float" default="0.0" />
+
+	<param name="layerAngle2" type="float" default="0.0" />
+	<param name="layer2enabled" type="bool" default="1" />
+	<param name="c2" type="vec4" default="0.4 0.4 0.4 1." />
+	<param name="param2_1" type="float" default="0.3" />
+	<param name="param2_2" type="float" default="0.5" />
+	<param name="param2_3" type="float" default="0.5" />
+	<param name="param2_4" type="float" default="0.6" />
+	<param name="param2_5" type="float" default="0.75" />
+	<param name="param2_6" type="float" default="0.0" />
+	
+	<param name="layerAngle3" type="float" default="0.0" />
+	<param name="layer3enabled" type="bool" default="1" />
+	<param name="c3" type="vec4" default="0.6 0.6 0.6 1." />
+	<param name="param3_1" type="float" default="0.35" />
+	<param name="param3_2" type="float" default="0.45" />
+	<param name="param3_3" type="float" default="0.35" />
+	<param name="param3_4" type="float" default="0.25" />
+	<param name="param3_5" type="float" default="0.75" />
+	<param name="param3_6" type="float" default="0.0" />
+	
+	<param name="layerAngle4" type="float" default="0.0" />
+	<param name="layer4enabled" type="bool" default="1" />
+	<param name="c4" type="vec4" default="0.8 0.8 0.8 1." />
+	<param name="param4_1" type="float" default="0.15" />
+	<param name="param4_2" type="float" default="0.4" />
+	<param name="param4_3" type="float" default="0.0" />
+	<param name="param4_4" type="float" default="0.0" />
+	<param name="param4_5" type="float" default="0.0" />
+	<param name="param4_6" type="float" default="0.0" />
+
+	<param name="layerAngle5" type="float" default="0.0" />
+	<param name="layer5enabled" type="bool" default="1" />
+	<param name="c5" type="vec4" default="1. 1. 0. 1." />
+	<param name="param5_1" type="float" default="0.1" />
+	<param name="param5_2" type="float" default="0.35" />
+	<param name="param5_3" type="float" default="0.0" />
+	<param name="param5_4" type="float" default="0.0" />
+	<param name="param5_5" type="float" default="0.0" />
+	<param name="param5_6" type="float" default="0.0" />	
+	<param name="hero_1" type="float" default="0.0" />
+	<param name="hero_2" type="float" default="0.25" />
+	<param name="hero_3" type="float" default="0.50" />
+	<param name="hero_4" type="float" default="0.75" />
+	<param name="hero_5" type="float" default="1.0" />
+	<param name="hero_6" type="float" default="0.0" />	
+	<param name="hero_7" type="float" default="0.0" />
+	<param name="hero_8" type="float" default="0.0" />	
+	
+	<language name="glsl" version="1.5">
+		<bind param="jit_position" program="vp" />
+		<bind param="jit_texcoord" program="vp" />
+		<bind param="textureMatrix0" program="vp" />
+		<bind param="modelViewProjectionMatrix" program="vp" />
+		<bind param="u_resolution" program="fp" />
+		<bind param="u_mouse" program="fp" />
+		<bind param="u_time" program="fp" />
+		<bind param="ADSRdata" program="fp" />
+		<bind param="mode" program="fp" />
+		<bind param="elements1" program="fp" />
+		<bind param="elements2" program="fp" />
+		<bind param="elements3" program="fp" />
+		<bind param="elements4" program="fp" />
+		<bind param="elements5" program="fp" />
+		
+		<bind param="layerAngle1" program="fp" />
+		<bind param="layer1enabled" program="fp" />
+		<bind param="c1" program="fp" />
+		<bind param="param1_1" program="vp" />
+		<bind param="param1_2" program="vp" />
+		<bind param="param1_3" program="vp" />
+		<bind param="param1_4" program="vp" />
+		<bind param="param1_5" program="vp" />
+		<bind param="param1_6" program="vp" />		
+		
+		<bind param="layerAngle2" program="fp" />
+		<bind param="layer2enabled" program="fp" />
+		<bind param="c2" program="fp" />
+		<bind param="param2_1" program="vp" />
+		<bind param="param2_2" program="vp" />
+		<bind param="param2_3" program="vp" />
+		<bind param="param2_4" program="vp" />
+		<bind param="param2_5" program="vp" />
+		<bind param="param2_6" program="vp" />	
+		
+		<bind param="layerAngle3" program="fp" />
+		<bind param="layer3enabled" program="fp" />
+		<bind param="c3" program="fp" />
+		<bind param="param3_1" program="vp" />
+		<bind param="param3_2" program="vp" />
+		<bind param="param3_3" program="vp" />
+		<bind param="param3_4" program="vp" />
+		<bind param="param3_5" program="vp" />
+		<bind param="param3_6" program="vp" />
+
+		<bind param="layerAngle4" program="fp" />
+		<bind param="layer4enabled" program="fp" />
+		<bind param="c4" program="fp" />
+		<bind param="param4_1" program="vp" />
+		<bind param="param4_2" program="vp" />
+		<bind param="param4_3" program="vp" />
+		<bind param="param4_4" program="vp" />
+		<bind param="param4_5" program="vp" />
+		<bind param="param4_6" program="vp" />
+
+		<bind param="layerAngle5" program="fp" />
+		<bind param="layer5enabled" program="fp" />
+		<bind param="c5" program="fp" />
+		<bind param="param5_1" program="vp" />
+		<bind param="param5_2" program="vp" />
+		<bind param="param5_3" program="vp" />
+		<bind param="param5_4" program="vp" />
+		<bind param="param5_5" program="vp" />
+		<bind param="param5_6" program="vp" />
+		<bind param="hero_1" program="vp" />
+		<bind param="hero_2" program="vp" />
+		<bind param="hero_3" program="vp" />
+		<bind param="hero_4" program="vp" />
+		<bind param="hero_5" program="vp" />
+		<bind param="hero_6" program="vp" />
+		<bind param="hero_7" program="vp" />
+		<bind param="hero_8" program="vp" />
+
+		
+		<program name="vp" type="vertex">
+<![CDATA[
+#version 330 core
+
+in vec3 jit_position;
+in vec2 jit_texcoord;
+uniform mat4 textureMatrix0;
+uniform mat4 modelViewProjectionMatrix;
+
+out jit_PerVertex {
+	vec2 texcoord;	
+} jit_out;
+
+void main() {	
+	gl_Position = modelViewProjectionMatrix * vec4(jit_position, 1.);	
+	jit_out.texcoord = vec2(textureMatrix0*vec4(jit_texcoord, 0., 1.));
+
+}
+]]>
+		</program>
+		<program name="fp" type="fragment">
+<!-- MAINTAIN THIS OFFSET SO YOU CAN DEBUG BY LINE NUMBER + 200 -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- MAINTAIN THIS OFFSET SO YOU CAN DEBUG BY LINE NUMBER + 200 -->
+<![CDATA[
+#version 330 core
+
+#define CNT 16
+#define PI 3.1459265358979
+#define TWO_PI 6.28318530718
+#define TAU PI * 2.0
+
+in jit_PerVertex {
+	vec2 texcoord;
+} jit_in;
+
+//main color out
+//www.khronos.org/opengl/wiki/Layout_Qualifier_(GLSL)
+layout (location = 0) out vec4 outColor;
+
+
+//bookofshaders
+uniform vec2 u_resolution;
+uniform vec2 u_mouse;
+uniform float u_time;
+
+uniform sampler2DRect ADSRdata;
+uniform int mode;
+
+uniform int elements1;
+uniform int elements2;
+uniform int elements3;
+uniform int elements4;
+uniform int elements5;
+
+//track1
+uniform float layerAngle1;
+uniform bool layer1enabled;
+uniform vec4 c1;
+uniform float param1_1;				//0.0
+uniform float param1_2;				//0.0
+uniform float param1_3;				//0.0
+uniform float param1_4;				//0.0	
+uniform float param1_5;				//0.0
+uniform float param1_6;				//0.0	
+
+//track2
+uniform float layerAngle2;
+uniform bool layer2enabled;
+uniform vec4 c2;
+uniform float param2_1;				//0.0
+uniform float param2_2;				//0.0
+uniform float param2_3;				//0.0
+uniform float param2_4;				//0.0	
+uniform float param2_5;				//0.0
+uniform float param2_6;				//0.0	
+
+//track3
+uniform float layerAngle3;
+uniform bool layer3enabled;
+uniform vec4 c3;
+uniform float param3_1;				//0.0
+uniform float param3_2;				//0.0
+uniform float param3_3;				//0.0
+uniform float param3_4;				//0.0	
+uniform float param3_5;				//0.0
+uniform float param3_6;				//0.0	
+
+//track4
+uniform float layerAngle4;
+uniform bool layer4enabled;
+uniform vec4 c4;
+uniform float param4_1;				//0.0
+uniform float param4_2;				//0.0
+uniform float param4_3;				//0.0
+uniform float param4_4;				//0.0	
+uniform float param4_5;				//0.0
+uniform float param4_6;				//0.0	
+
+//track5
+uniform float layerAngle5;
+uniform bool layer5enabled;
+uniform vec4 c5;
+uniform float param5_1;				//0.0
+uniform float param5_2;				//0.0
+uniform float param5_3;				//0.0
+uniform float param5_4;				//0.0	
+uniform float param5_5;				//0.0
+uniform float param5_6;				//0.0	
+//hero midi in
+uniform float hero_1;				//0.0
+uniform float hero_2;				//0.0
+uniform float hero_3;				//0.0
+uniform float hero_4;				//0.0	
+uniform float hero_5;				//0.0
+uniform float hero_6;				//0.0	
+uniform float hero_7;				//0.0
+uniform float hero_8;				//0.0	
+
+//FUNCTIONS
+//========================================================================================
+
+//ORIGINAL SHADER
+//https://www.shadertoy.com/view/ls3GRr
+
+//https://soundcloud.com/lg3bass
+
+
+float linearstep(float begin, float end, float t) {
+    return clamp((t - begin) / (end - begin), 0.0, 1.0);
+}
+
+mat2 rotate2d(in float radians){
+    float c = cos(radians);
+    float s = sin(radians);
+    return mat2(c, -s, s, c);
+}
+
+vec2 rotate(in vec2 st, in float radians, in vec2 center) {
+  return rotate2d(radians) * (st - center) + center;
+}
+
+void rotateShape(inout vec2 _st, float a){
+	_st = mat2( cos(a) , -sin(a), sin(a), cos(a) ) * (_st);
+	//_st += 0.5;
+}
+
+//source: https://www.iquilezles.org/www/articles/functions/functions.htm
+float pcurve( float x, float a, float b , float amp)
+{
+    float k = pow(a+b,a+b) / (pow(a,a)*pow(b,b));
+    
+    float curve = k * pow( x, a ) * pow( 1.0-x, b );
+    return curve * amp;
+}
+
+float map(float value, float min1, float max1, float min2, float max2) {
+  return min2 + (value - min1) * (max2 - min2) / (max1 - min1);
+}
+
+float stroke(float x, float s, float w){
+	float d = step(s, x+w * 0.5) - step(s, x - w * 0.5);
+	return clamp(d,0.0,1.0);
+}
+
+float fill(float x, float size){
+	return 1.0 - step(size, x);
+}
+
+float circleSDF(vec2 st){
+	return length(st-0.5)*2.0;
+}
+
+float rectSDF(vec2 st, vec2 s) {
+    st = st*2.-1.;
+    return max( abs(st.x/s.x),
+                abs(st.y/s.y) );
+}
+
+float hexSDF(vec2 st) {
+    st = abs(st*2.-1.);
+    return max(abs(st.y), st.x * 0.86603 + st.y * 0.5);
+}
+
+float plot(vec2 st, float pct){
+  return  smoothstep( pct-0.02, pct, st.y) -
+          smoothstep( pct, pct+0.02, st.y);
+}
+
+float poly(vec2 p, float aa, float r, float t, int instance, float range, int _poly_points, float _copy_scale)
+{
+    //PUBLISH
+    //poly points
+    //if you change this then adjust the layer params.
+    int poly_points = _poly_points;//4-5
+    
+    //PUBLISH
+    //scale of the copies.(+smaller,-larger)//
+    float copy_scale = _copy_scale;//0.05
+    
+    float cs2 = -1.0;
+    float cs1 = 0.0;
+    
+    
+    //this adjusts the over tightness and release state cutoff. 
+    //higher number = quicker cutoff.
+    //value of 7. keeps it all together tight. 
+    //value of 1.5 the 7 or 8th instance releases fully.
+    //range 0.5 - 2.0
+    //default 1.0
+    float multiplier = 1.0;//1.0
+    
+    //time override
+    //t = 0.588;
+  
+    if(t <= 0.0){  
+	    cs2 = -10.0;
+	    r = 0;
+	    copy_scale = 0;
+    }
+
+  
+     //ATTACK
+    if(t > 0.0 && t < 0.25){
+      float modT = linearstep(0.0,0.25,t);	
+      
+      //fly out
+      cs1 = (1.-pow(modT,3.0))*((r*2.5)+multiplier*float(instance));
+      cs2 = 0.01*(multiplier*float(instance));
+      //r *= pow(modT,3.0);
+      copy_scale *= pow(modT,3.0);
+
+
+    }
+
+    //DECAY
+    if(t >= 0.25 && t < 0.5){
+      float modT = linearstep(0.25,0.50,t);
+      float pulse = pcurve( modT, 0.8, 15.0 , 0.2);
+      
+      //pop
+      cs2 = pulse*(0.5+multiplier*float(instance));
+
+
+    }
+
+    //SUSTAIN
+    if(t >= 0.5 && t < 0.75){
+      float modT = linearstep(0.5,0.75,t);		
+      
+      //do nothing
+      cs2 = 0.01*(multiplier*float(instance));
+      
+
+    }
+
+    //RELEASE
+    if(t >= 0.75 && t < 1.0){
+      float modT = linearstep(0.75,1.0,t);
+           
+      //grow(or shrink)
+      cs2 = map((1.-pow(modT,0.3)),0.0,0.999,-(r*2.5)-(multiplier*float(instance)),0.0);
+      r *= pow(1.-modT,0.3);
+      copy_scale *= pow(1.-modT,0.3);
+    }
+   
+    //max off
+    if(t >= 1.0){  
+      cs1 = -10.0;
+      cs2 = -10.;
+      r = 0.;
+      copy_scale = 0;
+    }
+
+    vec2 coolShape = vec2(cs1, cs2);//0501 - testing
+    //coolShape = vec2(0.0, 0.5);
+
+    //makes these undulating patterns
+    float shardRange = 2.48854;//1.17
+    shardRange = range;
+    float shardStyle = map(t, 0., 1.0, shardRange+0.2, shardRange);
+    //shardStyle = shardRange;//0501 - testing
+    
+    //init distance
+    float d=0.0;
+
+    float thisRadius = r-(copy_scale*float(instance));
+  
+    //PARAM
+    for(int i=0;i<poly_points;++i)//0501 - testing
+    {
+        float a=float(i)/aa*acos(-1.0)*shardStyle;
+        float b=max(0.0,dot(p+coolShape,vec2(cos(a),sin(a)))-thisRadius);
+      
+        d+=b*b;//could make a cool motion blur if I move this into the attack or release conditional
+    }
+    return sqrt(d);
+}
+
+float softPoly(vec2 p, vec2 offset, float r, float s, float t, int i, float range, float pOutline, float pAngle, int pPoints, float pScale)
+{
+    
+    //PUBLISH param_outline
+    //PUBLISH param_angle - move up to layer1()
+    float param_outline = pOutline;//outline of the layer, default 4.0
+    float param_angle = pAngle;//sukkaa //3.0
+    
+    int param_poly_points = pPoints;//4
+    float param_copy_scale = pScale;//0.05
+  
+    //mirror code   
+    p=abs(p);
+    
+    if(p.x>p.y){
+      p=p.yx;//i know this is swizzling? but why?
+    }
+  
+    p*=mat2(cos(param_angle),sin(param_angle),-sin(param_angle),cos(param_angle));
+    p-=offset;
+    float d=poly(p,param_angle,r-s,t,i,range,param_poly_points,param_copy_scale);
+    
+    return clamp(smoothstep(0.0,s*param_outline,d),0.0,1.0);
+  
+}
+
+float layer1(in vec2 p, in vec2 offset, in float t, in int i, inout float s1, inout float s2, inout float d, in float range, float v, float pOutline, float pAngle, int pPoints, float pScale){
+
+  offset *= float(i);  
+  
+  //PUBLISH param_volume
+  float param_volume = v;
+  float r=param_volume;//0.15
+  
+  float param_outline = pOutline;//outline of the layer, default 4.0
+  float param_angle = pAngle;//sukkaa //3.0
+
+  int param_poly_points = pPoints;//4
+  float param_copy_scale = pScale;//0.05
+  
+  
+  
+  float a=1.0-softPoly(p,offset,r,0.003,t,i,range,param_outline,param_angle,param_poly_points,param_copy_scale);//0.003
+  
+  vec2 shadowPos = vec2(-0.010, -0.050);
+  
+  vec2 pos = p+2.0*shadowPos*(1.0+float(i)-d);
+  float dist = 0.01+0.003*(1.0+float(i)-d);
+  float as0=softPoly(pos,offset,r,dist,t,i,range,param_outline,param_angle,param_poly_points,param_copy_scale);
+  
+  dist = 0.01+0.01*(1.0+float(i)-d);
+  float as1=softPoly(p,offset,r,dist,t,i,range,param_outline,param_angle,param_poly_points,param_copy_scale);
+
+  s1*=as0;
+  s2*=as1;
+  s1=mix(s1,1.5,a);
+  s2=mix(s2,1.0,a);
+
+
+  return a;
+
+}
+
+float layer2(in vec2 p, in vec2 offset, in float time, in int i){
+
+  //mirror code   
+  p=abs(p);
+
+  if(p.x>p.y){
+    p=p.yx;//i know this is swizzling? but why?
+  }
+  
+  //output
+  float d;
+  
+  //animatable
+  float p1;
+  
+  float maxSize = 19.0;
+  
+  //min off
+  if(time <= 0.0){  
+    p1 = 0.0;
+  }
+
+  //ATTACK
+  if(time > 0.0 && time < 0.25){
+
+    float modT = linearstep(0.0,0.25,time);		
+
+    p1 = map(pow(modT,2.0), 0.0, 1.0, 17.0, maxSize);
+
+    //p1 = 20.0*modT;
+  }
+
+    //time = 0.31915;
+
+  //DECAY
+  if(time >= 0.25 && time < 0.5){
+
+    float modT = linearstep(0.25,0.50,time);
+    float pulse1 = pcurve(modT, 0.03960, 3., 0.34582);
+
+    p1 = maxSize+maxSize*pulse1;
+  }
+
+  //SUSTAIN
+  if(time >= 0.5 && time < 0.75){
+
+    float modT = linearstep(0.5,0.75,time);		
+
+    p1 = maxSize;
+  }
+
+  //RELEASE
+  if(time >= 0.75 && time < 1.0){
+
+    float modT = linearstep(0.75,1.0,time);
+
+    p1 = map(1.0-pow(modT,2.0), 1.0, 0.0, maxSize, 17.0);    
+  }
+
+  //max off
+  if(time >= 1.0){  
+    p1 = 0.0;
+  }
+  
+  float hex = fill(hexSDF((p+offset)*(10.0/float(i+1))),p1);
+  float circ = fill(circleSDF((p+offset)*(9.60912/float(i+1))),18.61844);
+  
+  d = hex-circ;
+  
+  
+  return d;
+
+}
+
+
+
+
+
+//TRACKS
+//========================================================================================
+/*
+float trackSTUB(inout vec2 _st, float time, float instance){
+
+	//modifiable params
+	float thisAngle = 360.0/float(elements2);	
+	
+	float thisSize = 1.0 * param2_1;
+	float thisOffset = 1.0 * param2_2;
+	float thisLocalAngle = 180.0 * param2_3;
+
+	//SETUP TRANS and ROTATION
+	float shape  = 0;
+	rotateShape(_st,radians(thisAngle*instance));
+	translateShape(_st,vec2(0.0,thisOffset));
+	rotateShape(_st,radians(thisLocalAngle));
+	
+	
+	//ATTACK
+	if(time >= 0.0 && time < 0.25){
+	
+		float modT = linearstep(0.0,0.25,time);		
+
+	}
+
+
+	//DECAY
+	if(time >= 0.25 && time < 0.5){
+
+		float modT = linearstep(0.25,0.50,time);
+		
+	}
+
+	//SUSTAIN
+	if(time >= 0.5 && time < 0.75){
+	
+		float modT = linearstep(0.5,0.75,time);		
+		
+	}
+
+	//RELEASE
+	if(time >= 0.75 && time <= 1.0){
+
+		float modT = linearstep(0.75,1.0,time);
+
+
+	}	
+	
+	return shape;
+
+}
+*/
+
+
+
+
+/*
+float heroTrack5(inout vec2 _st, float time, float instance){
+
+	//modifiable params
+	float thisAngle = 360.0/float(elements5);	
+	
+	float thisSize = 1.0 * param5_1;
+	float thisOffset = 1.0 * param5_2;
+	float thisLocalAngle = 180.0 * param5_3;
+
+	//SETUP TRANS and ROTATION
+	float shape  = 0;
+	rotateShape(_st,radians(thisAngle*instance));
+	translateShape(_st,vec2(0.0,thisOffset));
+	
+	//make a diamond first.
+	rotateShape(_st,radians(45.0));
+	rotateShape(_st,radians(thisLocalAngle));
+	
+	float baseShape = rectSDF(_st,vec2(1.0,1.0));
+	
+	
+	//ATTACK
+	if(time >= 0.0 && time < 0.25){
+	
+		float modT = linearstep(0.0,0.25,time);		
+		float size = pow(modT,4.0)*thisSize;
+		
+		shape = fill(baseShape,size);
+
+	}
+
+
+	//DECAY
+	if(time >= 0.25 && time < 0.5){
+
+		float modT = linearstep(0.25,0.50,time);	
+		float pulse = pcurve( modT, 0.8, 15.0 , 0.1);
+		float size1 = thisSize+pulse;
+		shape = fill(baseShape,size1);
+		
+	}
+
+	//SUSTAIN
+	if(time >= 0.5 && time < 0.75){
+	
+		float modT = linearstep(0.5,0.75,time);		
+		float size1 = thisSize;
+		shape = fill(baseShape,size1);
+		
+	}
+
+	//RELEASE
+	if(time >= 0.75 && time <= 1.0){
+
+		float modT = linearstep(0.75,1.0,time);
+		float size1 = pow(1.0-modT,4.0)*thisSize;
+		shape = fill(baseShape,size1);
+
+	}	
+	
+	return shape;
+
+}
+*/
+
+//MAIN
+//========================================================================================
+
+void main() {
+
+	int animated = 0;
+	
+	float autoTime;
+	
+	if(animated == 0){		
+		autoTime = fract(u_time / 04.0);
+	} else {
+		autoTime = 0.0;
+	}
+	
+	//coordinate space
+	vec2 uv = jit_in.texcoord.st/u_resolution.xy;
+	
+    vec2 t=(uv-vec2(0.5))*20.;
+    t.x*=u_resolution.x/u_resolution.y;
+
+    vec2 st = rotate(t.xy+vec2(0.0), radians(0.0), vec2(0.0));	
+	
+
+	//50% performance increase if you DON'T USE a struct !!!!!	
+	//vec2	st_1[CNT],		st_2[CNT],		st_3[CNT],		st_4[CNT],		st_5[CNT];
+	float 	time_1[CNT],	time_2[CNT],	time_3[CNT],	time_4[CNT],	time_5[CNT];
+
+	/*
+	float	mask_1,			mask_2,			mask_3,			mask_4,			mask_5 			= 0.0;
+	vec3	color_1,		color_2,		color_3,		color_4,		color_5			= vec3(0.0);
+	
+	float	dist1,			dist2,			dist3,			dist4,			dist5			= 0.0;
+	*/
+	
+	
+	//layer1enabled
+	
+	if(mode == 1){
+	
+		time_5[0] = hero_1;
+		time_5[1] = hero_2;
+		time_5[2] = hero_3;
+		time_5[3] = hero_4;
+		time_5[4] = hero_5;
+		time_5[5] = hero_6;
+		time_5[6] = hero_7;
+		time_5[7] = hero_8;
+
+	
+	}
+
+    //output pixels  
+    vec3 col; 
+
+    //Basic, solid color
+    col=vec3(0.474, 0.546, 0.670);
+    
+    //Gradient
+    col+=pow(1.0-smoothstep(0.,10.,-t.y+0.5),5.0)*vec3(0.2, 0.511, 0.990)*0.4;
+    
+    float shape1, shape2, shape3, shape4;
+    float shape1mask, shape2mask, shape3mask, shape4mask;
+  
+    vec2 st1 = rotate(st+vec2(0.0), radians(layerAngle1), vec2(0.0));//0501 - testing
+    vec2 st2 = rotate(st+vec2(0.0), radians(layerAngle2), vec2(0.0));
+    vec2 st3 = rotate(st+vec2(0.0), radians(layerAngle3), vec2(0.0));
+    vec2 st4 = rotate(st+vec2(0.0), radians(layerAngle4), vec2(0.0));
+  
+    //PUBLISH - 3 params for the vec2[1] component
+    vec2 offset1 = vec2(param1_1*2.0-1.0, param1_2*1.5-1.5);
+    vec2 offset2 = vec2(param2_1*2.0-1.0, param2_2*1.5-1.5);
+    vec2 offset3 = vec2(param3_1*2.0-1.0, param3_2*1.5-1.5);
+    float xOffset = 0.5;
+    float yOffset = -2.0;
+    vec2 offset4 = vec2(param4_1*6.0-3.0, param4_2*6.0-3.0);   
+    //create an array of timelines
+    //float time_1[CNT];
+    //setTimeArray(time_1);
+  
+    float shad0=1.,shad1=1.,shad2=1.,shad3=1.,shad4=1.,shad5=1.;
+    
+    float depth=0.;
+
+    //OVERIDES
+    float time_All = -0.05774;
+  
+    for(int i=0;i<8;++i)
+    {
+
+		vec4 item = vec4(0.0);
+		
+		if(mode == 1){
+			item = texture(ADSRdata, vec2(float(i)+0.5,float(0)+0.5));
+		
+			time_1[i] = item.a;		//plane 0
+			time_2[i] = item.x;
+			time_3[i] = item.y;
+			time_4[i] = item.z;
+			
+		
+		} else if (mode == 0) {
+			time_1[i] = autoTime;
+			time_2[i] = autoTime;
+			time_3[i] = autoTime;
+			time_4[i] = autoTime;
+			time_5[i] = autoTime;
+		}
+	
+
+
+/*
+layer1(
+	in vec2 p,			  //position
+	in vec2 offset, 	//position modifier
+	in float t, 		  //time
+	in int i, 			  //instance
+	inout float s1, 	//shadow1
+	inout float s2, 	//shadow2
+	inout float d, 		//depth
+	in float range, 	//sustain(modulation) range
+	float v, 			    //volume
+	float pOutline, 	//line width(outline)
+	float pAngle, 		//sukka effect
+	int pPoints, 		  //points in the poly shapes
+	float pScale		  //scale modifier for instances in layer
+)
+*/
+    if(layer1enabled){
+    	       
+        shape1 = layer1(st1, offset1, time_1[i], i, shad0, shad1, depth,param1_3*4.0,param1_4*1.5,param1_5*6.0,3.0,4,param1_6*0.4-0.2);
+        shape1mask += clamp(shape1,0.,1.);
+	}
+        
+    if(layer2enabled){   
+        shape2 = layer1(st2, offset2, time_2[i], i, shad2, shad3, depth,param2_3*4.0,param2_4*1.5,param2_5*6.0,3.0,4,param2_6*0.4-0.2);
+        shape2mask += clamp(shape2,0.,1.);
+    }
+        
+    if(layer3enabled){   
+        shape3 = layer1(st3, offset3, time_3[i], i, shad4, shad5, depth,param3_3*4.0,param3_4*1.5,param3_5*6.0,3.0,5,param3_6*0.4-0.2);
+        shape3mask += clamp(shape3,0.,1.);  
+    }   
+
+	if(layer4enabled){  
+        shape4 = max(shape4,layer2(st4, offset4, time_4[i], i));
+        shape4mask += clamp(shape4,0.,1.0);//PARAM param4_6 fade out from outside.                  
+	}
+      
+        vec3 c=vec3(1.0);
+              
+        //accumulate the color       
+        col=max(
+              max(
+                mix(col,c,shape1),mix(col,c,shape2)
+              ),
+              mix(col,c,shape3)
+            );
+
+        
+        depth=max(
+                max(
+                  mix(depth,float(i),shape1),mix(depth,float(i),shape2)
+                ), 
+                mix(depth,float(i),shape3)
+              );
+        
+    }
+    
+    //LAYER 1
+    //shadow
+    vec3 lyr1Comp1 = 1.0 * mix(0.,1.,shad0) * vec3(1.0);  
+  
+    //foreground
+    vec3 lyr1Comp2 = 1.0 * mix(0.,1.0,shad1) * vec3(1.0);
+
+    //LAYER 2
+    //shadow
+    vec3 lyr2Comp1 =  1.0 * mix(0.,1.,shad2) * vec3(1.0);
+  
+    //foreground
+    vec3 lyr2Comp2 = 1.0 * mix(0.,1.,shad3) * vec3(1.0);
+  
+    //LAYER 3
+    //shadow
+    vec3 lyr3Comp1 = 1.0 * mix(0.,1.,shad4) * vec3(1.0);  
+  
+    //foreground
+    vec3 lyr3Comp2 = 1.0 * mix(0.,1.,shad5) * vec3(1.0);  
+  
+    vec3 shadowPass = lyr1Comp1*lyr2Comp1+vec3(shape2mask);
+    shadowPass = min(shadowPass+vec3(shape3mask*0.3), lyr3Comp1);
+    
+    shadowPass *= 0.85;
+    
+    //PUBLISH blend float and vec3
+    vec3 lyrColor1 = vec3(shape1mask*-0.42664)*c1.rgb;
+    vec3 lyrColor2 = vec3(shape2mask*-0.15904)*c2.rgb;
+    vec3 lyrColor3 = vec3(shape3mask*-0.06640)*c3.rgb;
+  
+    vec3 forgroundPass = min(min((lyr1Comp2+lyrColor1),lyr2Comp2+lyrColor2),lyr3Comp2+lyrColor3);
+    
+    //final output
+    vec3 finalComp;
+
+	//add the 4th layer
+	col = max(col,shape4mask*c4.rgb);
+
+  
+    //IDEA 1 (DARK)
+    //finalComp = min(0.5 *vec3(1.0) * col * mix(forgroundPass, vec3(0.9), shadowPass),shadowPass);
+    
+    //IDEA 2 (BRIGHT)
+    finalComp = col*min(forgroundPass,shadowPass);
+	
+	//finalComp = col*shadowPass;
+	
+
+
+//PLOT TESTING 
+float testCurve = 1.0-pcurve(uv.x, 1.0, 6.0, 0.3);
+testCurve = linearstep(0.0,1.0,uv.x);
+testCurve = pow(uv.x,2.0);
+
+float pct = plot(uv,testCurve);
+vec3 test = pct*vec3(1.0);
+
+//uncomment "test" line OVERIDE THE outColor
+outColor = vec4(finalComp,1.0);
+//outColor = vec4(test,1.0);
+
+
+	
+
+}	
+]]>
+		</program>
+	</language>
+</jittershader>

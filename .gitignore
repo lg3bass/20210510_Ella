@@ -1,0 +1,26 @@
+# /BW_PUBLISH/20210510_Ella/ #
+#################################################
+
+# OS generated files #
+######################
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# PROJECT FILES I DON'T WANT ON GIT #
+#####################################
+VIDEO/
+Ella_1\ Project/zOLD/
+Ella_1\ Project/Samples/
+Ella_1\ Project/M4L/zOLD/
+Ella_1\ Project/M4L/JSON/zOLD/
+Ella_1\ Project/M4L/JXS-files/zOLD/
+Ella_1\ Project/Finale/zOLD/
+Ella_1\ Project/Backup/
+
+
+
